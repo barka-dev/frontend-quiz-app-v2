@@ -1,5 +1,8 @@
+
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Image from 'next/image';
+import ThemeSwitcher from "./themeSwitcher";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,15 +12,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+ 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <header>
-          <img src="/images/icon-accessibility.svg" alt="topic icon"/>
+          <Image src="/images/icon-accessibility.svg" alt="topic icon" width={40} height={40}/>
           <h1>Accessibility</h1>
-          <img src="/images/icon-sun-dark.svg" class="sunmoonIcons" alt="sun icon"/>
-          <input type="checkbox" name="theme" class="themeIcon" id="theme"/>
-          <img src="/images/icon-moon-dark.svg" class="sunmoonIcons" alt="moon icon"/>
+          <ThemeSwitcher/>
         </header>
         {children}
         </body>
