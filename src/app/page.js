@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import SubjectsLinks from "./subjectsLinks";
 
 export default function Home() {
   return (
@@ -10,22 +11,7 @@ export default function Home() {
         <p>Pick a subject to get started.</p>
       </section>
       <article>
-        <a href="/html_section" className="subjects">
-          <Image src="/images/icon-html.svg" alt="html icon"  width={40} height={40}/> HTML
-        </a>
-        <a href="/CSS_section" className="subjects">
-          <Image src="/images/icon-css.svg" alt="css icon"  width={40} height={40} /> CSS
-        </a>
-        <a href="/html_section" className="subjects">
-          <Image src="/images/icon-js.svg" alt="js icon"  width={40} height={40} /> Javascript
-        </a>
-        <a href="/html_section" className="subjects">
-          <Image
-            src="/images/icon-accessibility.svg"
-            alt="accessibility icon"
-            width={40} height={40}/>
-          Accessibility
-        </a>
+        <SubjectsLinks/>
       </article>
     </main>
   );
