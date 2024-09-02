@@ -56,14 +56,14 @@ header{
   gap:1rem;
 }
 
-header > img:first-of-type{
+.header_subject_icon{
   background-color:var(--light-purple);
   padding:5.71px;
   border-radius:4px;
   visibility:hidden;
 }
 
-h1{
+.header_subject_title{
   font-size:1.125rem;
   color:var(--dark-navy);
   font-weight:500;
@@ -239,5 +239,25 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 input[type="radio"]{
+  display:none;
+}
+
+input[type="radio"]:checked + span{
+  background-color: var(--purple);
+  color:var(--pure-white);
+}
+
+.answers{
+  border:3px solid transparent;
+}
+
+.active{
+  border:3px solid var(--purple)!important;
+}
+
+.correct_Incorrect_Icon{
+  margin-inline-start:auto;
+  width:2rem;
+  height:2rem;
   display:none;
 }

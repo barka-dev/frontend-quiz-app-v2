@@ -2,6 +2,13 @@
 import Image from "next/image";
 
 export default function SubjectsLinks(){
+    const addVisibility = ()=>{
+        const header_subject_icon = document.querySelector(".header_subject_icon");
+        const header_subject_title = document.querySelector(".header_subject_title");
+        header_subject_icon.style.visibility = 'visible';
+        header_subject_title.style.visibility = 'visible';
+
+    }
     const handleClick = (e)=>{
         const topics = ['HTML','CSS', 'Javascript', 'Accessibility'];
         const result = topics.find(topic=>e.target.textContent.trim() == topic);
