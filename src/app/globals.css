@@ -279,3 +279,27 @@ input[type="radio"]{
   background-color: var(--red);
   color:var(--pure-white);
 }
+
+.error_message{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:0.5rem;
+  display:none;
+}
+
+.error_icon{
+  width:2rem;
+  height:2rem;
+}
+
+.error_text{
+  font-size:1.125rem;
+  line-height:100%;
+  color:var(--red);
+  font-weight:normal;
+}
+
+.visible{
+  visibility:visible;
+}
