@@ -202,7 +202,7 @@ input[type="range"]{
 
 input[type="range"]::after{
   content:'';
-  width:90%;
+  width:60%;
   height: 0.5rem;
   background: var(--purple);
   border-radius: 104px;
@@ -215,7 +215,7 @@ input[type="range"]::-webkit-slider-thumb{
   appearance:none;
 }
 
-.answers span{
+.option_letter{
   background-color:var(--light-grey);
   color:var(--grey-navy);
   font-size:1.125rem;
@@ -242,7 +242,7 @@ input[type="radio"]{
   display:none;
 }
 
-input[type="radio"]:checked + span{
+.active_letter{
   background-color: var(--purple);
   color:var(--pure-white);
 }
@@ -252,7 +252,7 @@ input[type="radio"]:checked + span{
 }
 
 .active{
-  border:3px solid var(--purple)!important;
+  border:3px solid var(--purple);
 }
 
 .correct_Incorrect_Icon{
@@ -260,4 +260,22 @@ input[type="radio"]:checked + span{
   width:2rem;
   height:2rem;
   display:none;
+}
+
+.correct_answer_label{
+  border:3px solid var(--green);
+}
+
+.correct_answer_span{
+  background-color: var(--green);
+  color:var(--pure-white);
+}
+
+.incorrect_answer_label{
+  border:3px solid var(--red);
+}
+
+.incorrect_answer_span{
+  background-color: var(--red);
+  color:var(--pure-white);
 }
