@@ -1,9 +1,9 @@
-import Image from "next/image";
 import styles from "./page.module.css";
 import SubjectsLinks from "./components/subjectsLinks";
 import Title from "./components/title";
 
 export default function Home() {
+
   return (
     <>
       <section>

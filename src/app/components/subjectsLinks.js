@@ -1,28 +1,20 @@
-'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect} from "react";
 
 export default function SubjectsLinks(){
-    
-    useEffect(()=>{
-        document.querySelector(".header_subject_icon").classList.remove("visible");
-        document.querySelector(".header_subject_title").classList.remove("visible");   
-    },[]);
-
     return(
         <>
             <Link href={{ pathname:'/questions', query:{ subject:'HTML'}}} className="subjects" >
-                <Image src="/images/icon-html.svg" alt="html icon"  width={40} height={40}/> HTML
+                <Image src="/images/icon-html.svg" alt="html icon" className="bg_html"  width={40} height={40}/> HTML
             </Link>
             <Link href={{ pathname:'/questions', query:{ subject:'CSS'}}} className="subjects">
-                <Image src="/images/icon-css.svg" alt="css icon"  width={40} height={40} /> CSS
+                <Image src="/images/icon-css.svg" alt="css icon" className="bg_css"  width={40} height={40} /> CSS
             </Link>
             <Link href={{ pathname:'/questions', query:{ subject:'JavaScript'}}} className="subjects">
-                <Image src="/images/icon-js.svg" alt="js icon"  width={40} height={40} /> Javascript
+                <Image src="/images/icon-js.svg" alt="js icon" className="bg_js"  width={40} height={40} /> Javascript
             </Link>
             <Link href={{ pathname:'/questions', query:{ subject:'Accessibility'}}} className="subjects">
-                <Image src="/images/icon-accessibility.svg" alt="accessibility icon" width={40} height={40}/> Accessibility
+                <Image src="/images/icon-accessibility.svg" alt="accessibility icon" className="bg_access" width={40} height={40}/> Accessibility
             </Link>
         </>
     )

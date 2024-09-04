@@ -1,10 +1,6 @@
-
-// import { Inter } from "next/font/google";
+import { DataProvider } from './DataContext';
 import "./globals.css";
 import Header from "./components/header";
-
-
-// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Frontend Quiz App",
@@ -12,15 +8,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
- 
   return (
     <html lang="en">
       <body>
-        <Header/>
-        <main>
-          {children}
-        </main>
+        <DataProvider>
+          <Header/>
+          <main>
+            {children}
+          </main>
+        </DataProvider>
       </body>
     </html>
   );

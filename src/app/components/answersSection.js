@@ -2,27 +2,33 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from 'next/navigation'
+import {useSearchParams } from 'next/navigation'
+import { useContext } from 'react';
+import { DataContext } from '../DataContext';
 
 export default function AnswersSection(){
-    const searchParams = useSearchParams()
-
+    const data = useContext(DataContext);
     useEffect(()=>{
+        console.log("Data from Context=>",data);
+    },[data])
+    // const searchParams = useSearchParams()
 
-        document.querySelector(".header_subject_icon").classList.add("visible");
-        document.querySelector(".header_subject_title").classList.add("visible");
-        fetch('/data/data.json')
-        .then((response) => response.json())
-        .then((jsonData) =>{
+    // useEffect(()=>{
+
+    //     document.querySelector(".header_subject_icon").classList.add("visible");
+    //     document.querySelector(".header_subject_title").classList.add("visible");
+    //     fetch('/data/data.json')
+    //     .then((response) => response.json())
+    //     .then((jsonData) =>{
         
-        const result = jsonData.quizzes.filter((item)=>item.title === searchParams.get('subject')); 
-        console.log("This is the data: ", result);
+    //     const result = jsonData.quizzes.filter((item)=>item.title === searchParams.get('subject')); 
+    //     console.log("This is the data: ", result);
      
         
-        })
-        .catch((error) => console.error('Error fetching the data: ', error));
+    //     })
+    //     .catch((error) => console.error('Error fetching the data: ', error));
         
-    },[searchParams]);
+    // },[searchParams]);
     
     const optionStyle = (answer_classes, opt_letter_classes, opt_parent_class, opt_sibling_class)=>{
         const answers = document.querySelectorAll(".answers");

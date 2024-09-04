@@ -3,7 +3,6 @@ import QuestionSection from "../components/questionSection";
 
 
 export default function Quiz(){
-    
     return(
         <>
             <section>
