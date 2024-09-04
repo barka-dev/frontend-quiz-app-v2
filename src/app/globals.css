@@ -33,6 +33,7 @@
   --pure-white:#FFFFFF;
   --green:#26D782;
   --red:#EE5454;
+  --range_status: 0%;
 }
 
 *{
@@ -202,13 +203,14 @@ input[type="range"]{
 
 input[type="range"]::after{
   content:'';
-  width:60%;
+  width:var(--range_status);
   height: 0.5rem;
   background: var(--purple);
   border-radius: 104px;
   border:4px solid var(--pure-white);
   position:absolute;
 }
+
 
 input[type="range"]::-webkit-slider-thumb{
   -webkit-appearance:none;
@@ -259,7 +261,7 @@ input[type="radio"]{
   margin-inline-start:auto;
   width:2rem;
   height:2rem;
-  display:none;
+  visibility:hidden;
 }
 
 .correct_answer_label{

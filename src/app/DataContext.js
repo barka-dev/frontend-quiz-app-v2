@@ -5,6 +5,7 @@ export const DataContext = createContext();
 
 export const DataProvider = ({children}) => {
     const [data, setData] = useState(null);
+    const[counter, setCounter] = useState(5);
 
     useEffect(()=>{
         fetch('/data/data.json')
@@ -16,7 +17,7 @@ export const DataProvider = ({children}) => {
     },[]);
 
     return (
-        <DataContext.Provider value={data}>
+        <DataContext.Provider value={{data, counter, setCounter}}>
             {children}
         </DataContext.Provider>
     )

@@ -8,27 +8,17 @@ import { DataContext } from '../DataContext';
 
 export default function AnswersSection(){
     const data = useContext(DataContext);
+    const searchParams = useSearchParams();
+    const[result, setResult] = useState(null);
+    const letters = ["A","B","C","D"];
+
     useEffect(()=>{
-        console.log("Data from Context=>",data);
-    },[data])
-    // const searchParams = useSearchParams()
-
-    // useEffect(()=>{
-
-    //     document.querySelector(".header_subject_icon").classList.add("visible");
-    //     document.querySelector(".header_subject_title").classList.add("visible");
-    //     fetch('/data/data.json')
-    //     .then((response) => response.json())
-    //     .then((jsonData) =>{
-        
-    //     const result = jsonData.quizzes.filter((item)=>item.title === searchParams.get('subject')); 
-    //     console.log("This is the data: ", result);
-     
-        
-    //     })
-    //     .catch((error) => console.error('Error fetching the data: ', error));
-        
-    // },[searchParams]);
+        if(data.data && searchParams.get('subject')){
+            const filtered = data.data.filter((item)=>item.title === searchParams.get('subject')); 
+            setResult(filtered[0] || null);
+            
+        }
+    },[data, searchParams, result])
     
     const optionStyle = (answer_classes, opt_letter_classes, opt_parent_class, opt_sibling_class)=>{
         const answers = document.querySelectorAll(".answers");
@@ -61,45 +51,34 @@ export default function AnswersSection(){
                 optionStyle(label_classes, span_classes, "incorrect_answer_label", "incorrect_answer_span");
                 correct_icons.forEach((icon)=>icon.src = "/images/icon-incorrect.svg");
             }
-            correct_icons.forEach((icon)=>icon.style.display = "none");
-            document.querySelector("input[type='radio']:checked ~ .correct_Incorrect_Icon").style.display = "inline";
+            correct_icons.forEach((icon)=>icon.style.visibility = "hidden");
+            document.querySelector("input[type='radio']:checked ~ .correct_Incorrect_Icon").style.visibility = "visible";
         }else{
             document.querySelector(".error_message").style.display = 'flex';
         }
     }
-
-    return(
-        <>
-            <label htmlFor="answer_A" className="answers" >
-                <input type="radio" className="radios" id="answer_A" name="answer" value="A" onChange={handleStyleOnCheck}/> 
-                <span className="option_letter">A</span>
-                4.5:1
-                <Image src="/images/icon-correct.svg" alt="correct icon" className="correct_Incorrect_Icon" width={40} height={40}/>
-            </label>
-            <label htmlFor="answer_B" className="answers" >
-                <input type="radio" className="radios" id="answer_B" name="answer" value="B" onChange={handleStyleOnCheck}/> 
-                <span className="option_letter">B</span>
-                3:1
-                <Image src="/images/icon-correct.svg" alt="correct icon" className="correct_Incorrect_Icon" width={40} height={40}/>
-            </label>
-            <label htmlFor="answer_c" className="answers" >
-                <input type="radio" className="radios" id="answer_c" name="answer" value="C" onChange={handleStyleOnCheck}/> 
-                <span className="option_letter">C</span>
-                2.5:1
-                <Image src="/images/icon-correct.svg" alt="correct icon" className="correct_Incorrect_Icon" width={40} height={40}/>
-            </label>
-            <label htmlFor="answer_d" className="answers" >
-                <input type="radio" className="radios" id="answer_d" name="answer" value="D" onChange={handleStyleOnCheck}/> 
-                <span className="option_letter">D</span>
-                5:1
-                <Image src="/images/icon-correct.svg" alt="correct icon" className="correct_Incorrect_Icon" width={40} height={40}/>
-            </label>
-            <button className="submit_answer" onClick={onSubmitOption}>Submit Answer</button>
-            <div className="error_message">
-                <Image src="/images/icon-incorrect.svg" alt="correct icon" className="error_icon" width={40} height={40}/>
-                <span className="error_text">Please select an answer</span>
-            </div>
-        </>
-    )
+    if(data && result){
+        return(
+            <>
+                {result.questions[data.counter-1].options.map((value, index)=>(
+                    <label htmlFor={`answer_${letters[index]}`} className="answers"  key={index}>
+                        <input type="radio" className="radios" id={`answer_${letters[index]}`} name="answer" value={letters[index]} onChange={handleStyleOnCheck}/> 
+                        <span className="option_letter">{letters[index]}</span>
+                        {value}
+                        <Image src="/images/icon-correct.svg" alt="correct icon" className="correct_Incorrect_Icon" width={40} height={40}/>
+                    </label>
+                ))}
+                <button className="submit_answer" onClick={onSubmitOption}>Submit Answer</button>
+                <div className="error_message">
+                    <Image src="/images/icon-incorrect.svg" alt="correct icon" className="error_icon" width={40} height={40}/>
+                    <span className="error_text">Please select an answer</span>
+                </div>
+            </>
+        )
+    }else{
+        return(
+            <h3>Loading options ...</h3>
+        )
+    }
 
 }
