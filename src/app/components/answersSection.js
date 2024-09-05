@@ -43,13 +43,26 @@ export default function AnswersSection({data, data_result}){
         if(checked_option_icon) checked_option_icon.style.visibility = "visible";
     }
 
+    const checkSubmittedResponse = () => {
+        const checked_option = document.querySelector("input[type='radio']:checked").value;
+        const selected_answer = data.questions[data_result.counter-1].options[letters.indexOf(checked_option)];
+        const correct_answer = data.questions[data_result.counter-1].answer;
+        console.log("checked response => ", selected_answer);
+        console.log("correct response => ", correct_answer);
+        if(selected_answer.trim() === correct_answer.trim()){
+            return true;
+        }
+        return false
+    }
+
     const onSubmitOption = ()=>{
         const checked_option = document.querySelector("input[type='radio']:checked");
-        const isAnswerCorrect = true;
+        const isAnswerCorrect = checkSubmittedResponse();
         if(checked_option){
             if(isAnswerCorrect){
                 styleOption(label_classes, span_classes, "correct_answer_label", "correct_answer_span");
                 toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
+                data_result.setScore(data_result.score+1);
             }else{
                 styleOption(label_classes, span_classes, "incorrect_answer_label", "incorrect_answer_span");
                 toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
