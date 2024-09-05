@@ -1,7 +1,19 @@
+'use client'
+
+import { useContext, useEffect, useState } from 'react';
+import { DataContext } from '../DataContext';
 import Image from "next/image";
 import Link from "next/link";
 
+
 export default function SubjectsLinks(){
+    const data = useContext(DataContext);
+    useEffect(()=>{
+        if(data){
+            data.setCounter(1);
+            data.setScore(0);
+        }
+    },[data])
     return(
         <>
             <Link href={{ pathname:'/questions', query:{ subject:'HTML'}}} className="subjects" >

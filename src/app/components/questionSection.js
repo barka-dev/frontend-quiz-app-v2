@@ -1,29 +1,21 @@
 'use client'
 
-import { useContext, useEffect, useState } from 'react';
-import { DataContext } from '../DataContext';
-import {useSearchParams } from 'next/navigation'
+import { useEffect} from 'react';
 
-export default function QuestionSection(){
-    const data = useContext(DataContext);
-    const searchParams = useSearchParams();
-    const[result, setResult] = useState(null);
 
+export default function QuestionSection({data, data_result}){
     useEffect(()=>{
-        if(data.data && searchParams.get('subject')){
-            const filtered = data.data.filter((item)=>item.title === searchParams.get('subject')); 
-            setResult(filtered[0] || null);
-            document.documentElement.style.setProperty('--range_status', `${data ? data.counter*10 : 0}%`);
-
+        if(data && data_result){
+            document.documentElement.style.setProperty('--range_status', `${data_result ? data_result.counter*10 : 0}%`);
         }
-    },[data, searchParams, result])
+    },[data,data_result])
 
-    if(data && result){
+    if(data && data_result){
         return(
             <>
-                <p>Question {data.counter} of {result.questions.length}</p>
-                <h3>{result.questions[data.counter-1].question}</h3>
-                <input type="range" className='range_status' min={1} max={10} value={data.counter} readOnly/>
+                <p>Question {data_result.counter} of {data.questions.length}</p>
+                <h3>{data.questions[data_result.counter-1].question}</h3>
+                <input type="range" className='range_status' min={1} max={10} value={data_result.counter} readOnly/>
             </>
         )
     }else{

@@ -53,15 +53,20 @@ header{
   padding:1rem 1.5rem;
   display:flex;
   align-items:center;
-  justify-content:flex-end;
   gap:1rem;
+}
+
+.subject_title_container{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  visibility:hidden;
 }
 
 .header_subject_icon{
   background-color:var(--light-purple);
   padding:5.71px;
   border-radius:4px;
-  visibility:hidden;
 }
 
 .header_subject_title{
@@ -69,7 +74,13 @@ header{
   color:var(--dark-navy);
   font-weight:500;
   margin-inline-end:auto;
-  visibility:hidden;
+}
+
+.theme_switcher_container{
+  margin-inline-start:auto;
+  position:relative;
+  display:flex;
+  gap:1rem;
 }
 
 .sunmoonIcons{
@@ -77,7 +88,7 @@ header{
 }
 
 .themeIcon{
-  position:relative;
+  /* position:relative; */
 }
 
 .themeIcon::before{
@@ -305,3 +316,26 @@ input[type="radio"]{
 .visible{
   visibility:visible;
 }
+
+.score_container{
+  background-color: var(--pure-white);
+  border-radius:12px;
+  padding:2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1rem;
+}
+
+.score{
+  font-size:5.5rem;
+  color:var(--dark-navy);
+  line-height:100%;
+}
+
+.score_msg{
+ font-size:1.125rem;
+ line-height:100%;
+ color:var(--grey-navy);
+}
+

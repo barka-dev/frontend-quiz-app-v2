@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <section>
-        <Title/>
+        <Title title_part1="Welcome to the" title_part2="Frontend Quiz!"/>
         <p className="italic_text_home">Pick a subject to get started.</p>
       </section>
       <article>
