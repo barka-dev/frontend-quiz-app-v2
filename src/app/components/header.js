@@ -1,4 +1,5 @@
 'use client'
+
 import { useData } from '../DataContext';
 import ThemeSwitcher from "./themeSwitcher";
 import SubjectTitle from './subjectTitle';

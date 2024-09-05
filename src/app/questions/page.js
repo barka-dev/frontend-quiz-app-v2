@@ -1,4 +1,5 @@
 'use client'
+
 import AnswersSection from "../components/answersSection";
 import QuestionSection from "../components/questionSection";
 import { useEffect, useState } from 'react';

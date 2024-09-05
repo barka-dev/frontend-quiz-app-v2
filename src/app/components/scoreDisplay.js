@@ -1,7 +1,12 @@
 'use client'
 import SubjectTitle from "./subjectTitle";
+import { useRouter } from 'next/navigation'
 
 export default function ScoreDisplay({data_result}){
+    const router = useRouter()
+    const playAgain = () =>{
+        router.push('/');
+    }
 
     return(
         <>
@@ -10,7 +15,7 @@ export default function ScoreDisplay({data_result}){
                 <h4 className="score">{data_result.score ? data_result.score : 0}</h4>
                 <span className="score_msg">out of 10</span>
             </div>
-            <button className="submit_answer">Play Again</button>
+            <button className="play_again_btn" onClick={playAgain}>Play Again</button>
         </>
     )
 }

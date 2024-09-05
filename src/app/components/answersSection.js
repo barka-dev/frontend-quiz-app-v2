@@ -4,47 +4,70 @@ import Image from "next/image";
 
 export default function AnswersSection({data, data_result}){
     const letters = ["A","B","C","D"];
-    
-    const optionStyle = (answer_classes, opt_letter_classes, opt_parent_class, opt_sibling_class)=>{
+    const label_classes = ["active", "correct_answer_label","incorrect_answer_label"];
+    const span_classes = ["active_letter","correct_answer_span", "incorrect_answer_span"];
+
+    const removeStyleFromOptions = (answer_classes, opt_letter_classes) => {
         const answers = document.querySelectorAll(".answers");
         const option_letters = document.querySelectorAll(".option_letter");
-        const checked_option = document.querySelector("input[type='radio']:checked");
 
         answers.forEach((element)=>element.classList.remove(...answer_classes));
         option_letters.forEach((element)=>element.classList.remove(...opt_letter_classes));
+    }
 
+    const addStyleToOptions = (opt_parent_class, opt_sibling_class) => {
+        const checked_option = document.querySelector("input[type='radio']:checked");
         checked_option.parentElement.classList.add(opt_parent_class);
-        checked_option.nextElementSibling.classList.add(opt_sibling_class);  
+        checked_option.nextElementSibling.classList.add(opt_sibling_class);
+    }
+    
+    const styleOption = (answer_classes, opt_letter_classes, opt_parent_class, opt_sibling_class)=>{
+        removeStyleFromOptions(answer_classes, opt_letter_classes);
+        addStyleToOptions(opt_parent_class, opt_sibling_class)
     }
 
     const handleStyleOnCheck = ()=>{
         document.querySelector(".error_message").style.display = 'none';
-        optionStyle(["active"], ["active_letter"], "active", "active_letter");
+        styleOption(["active"], ["active_letter"], "active", "active_letter");
+    }
+
+    const toggleDisplayForCorrectIncorrectIcon = (isAnswerCorrect) =>{
+        const correct_icons = document.querySelectorAll(".correct_Incorrect_Icon");
+        const checked_option_icon = document.querySelector("input[type='radio']:checked ~ .correct_Incorrect_Icon");
+        if(isAnswerCorrect){
+            correct_icons.forEach((icon)=>icon.src = "/images/icon-correct.svg");
+        }else{
+            correct_icons.forEach((icon)=>icon.src = "/images/icon-incorrect.svg");
+        }
+        correct_icons.forEach((icon)=>icon.style.visibility = "hidden");
+        if(checked_option_icon) checked_option_icon.style.visibility = "visible";
     }
 
     const onSubmitOption = ()=>{
-        
-        data_result.setCounter(data_result.counter+1);
-       
-        // const label_classes = ["active", "correct_answer_label","incorrect_answer_label"];
-        // const span_classes = ["active_letter","correct_answer_span", "incorrect_answer_span"];
-        // const correct_icons = document.querySelectorAll(".correct_Incorrect_Icon");
-        // const checked_option = document.querySelector("input[type='radio']:checked");
-        // const status = false;
-        // if(checked_option){
-        //     if(status){
-        //         optionStyle(label_classes, span_classes, "correct_answer_label", "correct_answer_span");
-        //         correct_icons.forEach((icon)=>icon.src = "/images/icon-correct.svg");
-        //     }else{
-        //         optionStyle(label_classes, span_classes, "incorrect_answer_label", "incorrect_answer_span");
-        //         correct_icons.forEach((icon)=>icon.src = "/images/icon-incorrect.svg");
-        //     }
-        //     correct_icons.forEach((icon)=>icon.style.visibility = "hidden");
-        //     document.querySelector("input[type='radio']:checked ~ .correct_Incorrect_Icon").style.visibility = "visible";
-        // }else{
-        //     document.querySelector(".error_message").style.display = 'flex';
-        // }
+        const checked_option = document.querySelector("input[type='radio']:checked");
+        const isAnswerCorrect = true;
+        if(checked_option){
+            if(isAnswerCorrect){
+                styleOption(label_classes, span_classes, "correct_answer_label", "correct_answer_span");
+                toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
+            }else{
+                styleOption(label_classes, span_classes, "incorrect_answer_label", "incorrect_answer_span");
+                toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
+            }
+        }else{
+            document.querySelector(".error_message").style.display = 'flex';
+        }
     }
+
+    const nextQuestion = () => {
+        data_result.setCounter(data_result.counter+1);
+        document.querySelectorAll(".radios").forEach((element)=>{
+            element.checked = false;
+        })
+        removeStyleFromOptions(label_classes, span_classes);
+        toggleDisplayForCorrectIncorrectIcon(false);
+    }
+
     if(data && data_result){
         return(
             <>
@@ -57,6 +80,7 @@ export default function AnswersSection({data, data_result}){
                     </label>
                 ))}
                 <button className="submit_answer" onClick={onSubmitOption}>Submit Answer</button>
+                <button className="next-question" onClick={nextQuestion}>Next Question</button>
                 <div className="error_message">
                     <Image src="/images/icon-incorrect.svg" alt="correct icon" className="error_icon" width={40} height={40}/>
                     <span className="error_text">Please select an answer</span>

@@ -2,7 +2,6 @@
 
 import { useEffect} from 'react';
 
-
 export default function QuestionSection({data, data_result}){
     useEffect(()=>{
         if(data && data_result){
