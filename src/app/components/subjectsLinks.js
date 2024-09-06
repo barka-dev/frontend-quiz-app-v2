@@ -15,12 +15,12 @@ export default function SubjectsLinks(){
         }
         const storage_value = localStorage.getItem('isDark');
         const isDark = storage_value === "true";
-        if(isDark){
+        if(isDark){         
             document.querySelectorAll(".subjects").forEach((el)=>{
                 el.classList.add('disable_box_shadow');
             })
         }
-    },[data])
+    },[data])                       
     return(
         <>
             <Link href={{ pathname:'/questions', query:{ subject:'HTML'}}} className="subjects" >

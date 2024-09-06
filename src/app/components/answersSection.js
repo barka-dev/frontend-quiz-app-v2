@@ -119,13 +119,22 @@ export default function AnswersSection({data, data_result}){
         resumeSelectingOptions();
     }
 
+    document.querySelectorAll('.answers').forEach((el)=>{
+        el.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              this.click();
+            }
+        });
+    })
+
    
 
     if(data && data_result){
         return(
             <>
                 {data.questions[data_result.counter-1].options.map((value, index)=>(
-                    <label htmlFor={`answer_${letters[index]}`} className="answers"  key={index}>
+                    <label tabindex="0" htmlFor={`answer_${letters[index]}`} className="answers"  key={index}>
                         <input type="radio" className="radios" id={`answer_${letters[index]}`} name="answer" value={letters[index]} onChange={handleStyleOnCheck}/> 
                         <span className="option_letter">{letters[index]}</span>
                         {value}
