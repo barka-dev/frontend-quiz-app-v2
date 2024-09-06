@@ -33,7 +33,11 @@
   --pure-white:#FFFFFF;
   --green:#26D782;
   --red:#EE5454;
+  --error:#EE5454;
   --range_status: 0%;
+  --bg-mobile-mode: url('/images/pattern-background-mobile-light.svg');
+  --bg-tablet-mode: url('/images/pattern-background-tablet-light.svg');
+  --bg-desktop-mode: url('/images/pattern-background-desktop-light.svg');
 }
 
 *{
@@ -45,7 +49,7 @@
 
 body{
   background-color:var(--light-grey);
-  background-image:url('../../public/images/pattern-background-mobile-light.svg');
+  background-image:var(--bg-mobile-mode);
   background-repeat:no-repeat;
 }
 
@@ -67,10 +71,13 @@ header{
   background-color:var(--light-purple);
   padding:5.71px;
   border-radius:4px;
+  width:2.5rem;
+  height:2.5rem;
 }
 
 .header_subject_title{
   font-size:1.125rem;
+  line-height:100%;
   color:var(--dark-navy);
   font-weight:500;
   margin-inline-end:auto;
@@ -107,7 +114,7 @@ header{
   content:'';
   width:0.75rem;
   height:0.75rem;
-  background-color:var(--pure-white);
+  background-color:#ffffff;
   border-radius:50%;
   position:absolute;
   top:50%;
@@ -179,6 +186,8 @@ article{
 .subjects img{
   border-radius:6px;
   padding:0.35rem;
+  width:2.5rem;
+  height:2.5rem;
 }
 
 .bg_html{
@@ -199,6 +208,7 @@ h3{
   line-height:120%;
   font-weight:500;
   margin-block:0.75rem;
+  color:var(--dark-navy);
 }
 
 input[type="range"]{
@@ -229,8 +239,8 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 .option_letter{
-  background-color:var(--light-grey);
-  color:var(--grey-navy);
+  background-color:#F4F6FA;
+  color:#626C7F;
   font-size:1.125rem;
   line-height:100%;
   padding-block:0.6875rem;
@@ -241,7 +251,7 @@ input[type="range"]::-webkit-slider-thumb{
 button{
   font-size:1.125rem;
   font-weight:500;
-  color:var(--pure-white);
+  color:#fff;
   cursor:pointer;
   border-radius:12px;
   padding-block:1.1875rem;
@@ -261,7 +271,7 @@ input[type="radio"]{
 
 .active_letter{
   background-color: var(--purple);
-  color:var(--pure-white);
+  color:#fff;
 }
 
 .answers{
@@ -285,7 +295,7 @@ input[type="radio"]{
 
 .correct_answer_span{
   background-color: var(--green);
-  color:var(--pure-white);
+  color:#fff;
 }
 
 .incorrect_answer_label{
@@ -294,7 +304,7 @@ input[type="radio"]{
 
 .incorrect_answer_span{
   background-color: var(--red);
-  color:var(--pure-white);
+  color:#fff;
 }
 
 .error_message{
@@ -313,7 +323,7 @@ input[type="radio"]{
 .error_text{
   font-size:1.125rem;
   line-height:100%;
-  color:var(--red);
+  color:var(--error);
   font-weight:normal;
 }
 
@@ -341,5 +351,132 @@ input[type="radio"]{
  font-size:1.125rem;
  line-height:100%;
  color:var(--grey-navy);
+}
+
+@media screen and (min-width: 768px){
+  
+  body{
+    background-image:var(--bg-tablet-mode);
+  }
+  
+  header{
+    padding:2.5rem 4rem 3.06rem;
+  }
+  
+  .subject_title_container{
+    gap:1.5rem;
+  }
+  
+  .header_subject_icon{
+    padding:0.5rem;
+    border-radius:8px;
+    width:3.5rem;
+    height:3.5rem;
+  }
+  
+  .header_subject_title{
+    font-size:1.75rem;
+  }
+  
+  .theme_switcher_container{
+    gap:2rem;
+  }
+  
+  .sunmoonIcons{
+    width:1.5rem;
+  }
+  
+  .themeIcon::before{
+    width:3rem;
+    height:1.75rem;
+  }
+  
+  .themeIcon::after{
+    width:1.25rem;
+    height:1.25rem;
+  }
+  
+  main{
+    padding-block:0rem;
+    padding-inline:4rem;
+    gap:4rem;
+  }
+  
+  h2, strong{
+    font-size:4rem;
+  }
+  
+  p{
+    font-size:1.25rem;
+  }
+  
+  article{
+    gap:1.5rem;
+  }
+  
+  .subjects, .answers{
+    border-radius:1.5rem;
+    gap:2rem;
+    font-size:1.75rem;
+  }
+  
+  .subjects img{
+    border-radius:0.75rem;
+    padding:0.5rem;
+    width:3.5rem;
+    height:3.5rem;
+  }
+  
+  h3{
+    font-size:2.25rem;
+    margin-block:1.68rem;
+  }
+  
+  input[type="range"]{
+    margin-block-start:0.8125rem;
+  }
+  
+  .option_letter{
+    font-size:1.75rem;
+    padding-block:0.875rem;
+    padding-inline:1.125rem;
+    border-radius:0.75rem;
+  }
+  
+  button{
+    font-size:1.75rem;
+    border-radius:1.5rem;
+    padding-block:2rem;
+    padding-inline:2rem;
+  }
+  
+  .correct_Incorrect_Icon{
+    width:2.5rem;
+    height:2.5rem;
+  }
+  
+  .error_icon{
+    width:2.5rem;
+    height:2.5rem;
+  }
+  
+  .error_text{
+    font-size:1.5rem;
+    line-height:150%;
+  }
+  
+  .score_container{
+    border-radius:1.5rem;
+    padding:3rem;
+  }
+  
+  .score{
+    margin-block-start:1.5rem;
+    font-size:9rem;
+  }
+  
+  .score_msg{
+   font-size:1.5rem;
+  }
 }
 

@@ -75,9 +75,9 @@ export default function AnswersSection({data, data_result}){
     }
 
     const onSubmitOption = ()=>{
-        stopSelectingOptions();
         const checked_option = document.querySelector("input[type='radio']:checked");
         if(checked_option){
+            stopSelectingOptions();
             const isAnswerCorrect = checkSubmittedResponse();
             if(isAnswerCorrect){
                 styleOption(label_classes, span_classes, "correct_answer_label", "correct_answer_span");
