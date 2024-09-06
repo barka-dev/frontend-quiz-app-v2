@@ -1,11 +1,22 @@
 'use client'
 
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function AnswersSection({data, data_result}){
     const letters = ["A","B","C","D"];
     const label_classes = ["active", "correct_answer_label","incorrect_answer_label"];
     const span_classes = ["active_letter","correct_answer_span", "incorrect_answer_span"];
+
+    useEffect(()=>{
+        const storage_value = localStorage.getItem('isDark');
+        const isDark = storage_value === "true";
+        if(isDark){
+            document.querySelectorAll(".answers").forEach((el)=>{
+                el.classList.add('disable_box_shadow');
+            })
+        }
+    })
 
     const removeStyleFromOptions = (answer_classes, opt_letter_classes) => {
         const answers = document.querySelectorAll(".answers");
@@ -92,6 +103,7 @@ export default function AnswersSection({data, data_result}){
             document.querySelector(".next_question").style.display = 'block';
         }else{
             document.querySelector(".error_message").style.display = 'flex';
+            document.querySelector(".error_message").scrollIntoView({ behavior: 'smooth' });
         }
     }
 

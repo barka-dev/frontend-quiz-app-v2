@@ -13,6 +13,13 @@ export default function SubjectsLinks(){
             data.setCounter(1);
             data.setScore(0);
         }
+        const storage_value = localStorage.getItem('isDark');
+        const isDark = storage_value === "true";
+        if(isDark){
+            document.querySelectorAll(".subjects").forEach((el)=>{
+                el.classList.add('disable_box_shadow');
+            })
+        }
     },[data])
     return(
         <>
