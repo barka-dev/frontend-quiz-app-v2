@@ -47,18 +47,38 @@ export default function AnswersSection({data, data_result}){
         const checked_option = document.querySelector("input[type='radio']:checked").value;
         const selected_answer = data.questions[data_result.counter-1].options[letters.indexOf(checked_option)];
         const correct_answer = data.questions[data_result.counter-1].answer;
-        console.log("checked response => ", selected_answer);
-        console.log("correct response => ", correct_answer);
         if(selected_answer.trim() === correct_answer.trim()){
             return true;
         }
         return false
     }
 
+    const markCorrectAnswer = () => {
+        const correct_answer = data.questions[data_result.counter-1].answer;
+        document.querySelectorAll(".answers").forEach((el)=>{
+            if(el.textContent.slice(1).trim() === correct_answer){
+                el.lastChild.src = '/images/icon-correct.svg';
+                el.lastChild.style.visibility = 'visible';
+            }
+        })    
+    }
+
+    const stopSelectingOptions = ()=>{
+        document.querySelectorAll('.radios').forEach((el)=>{
+            el.disabled= true;
+        })
+    }
+    const resumeSelectingOptions = ()=>{
+        document.querySelectorAll('.radios').forEach((el)=>{
+            el.disabled = false;
+        })
+    }
+
     const onSubmitOption = ()=>{
+        stopSelectingOptions();
         const checked_option = document.querySelector("input[type='radio']:checked");
-        const isAnswerCorrect = checkSubmittedResponse();
         if(checked_option){
+            const isAnswerCorrect = checkSubmittedResponse();
             if(isAnswerCorrect){
                 styleOption(label_classes, span_classes, "correct_answer_label", "correct_answer_span");
                 toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
@@ -66,7 +86,10 @@ export default function AnswersSection({data, data_result}){
             }else{
                 styleOption(label_classes, span_classes, "incorrect_answer_label", "incorrect_answer_span");
                 toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
+                markCorrectAnswer();
             }
+            document.querySelector(".submit_answer").style.display = 'none';
+            document.querySelector(".next_question").style.display = 'block';
         }else{
             document.querySelector(".error_message").style.display = 'flex';
         }
@@ -79,7 +102,12 @@ export default function AnswersSection({data, data_result}){
         })
         removeStyleFromOptions(label_classes, span_classes);
         toggleDisplayForCorrectIncorrectIcon(false);
+        document.querySelector(".submit_answer").style.display = 'block';
+        document.querySelector(".next_question").style.display = 'none';
+        resumeSelectingOptions();
     }
+
+   
 
     if(data && data_result){
         return(
@@ -93,7 +121,7 @@ export default function AnswersSection({data, data_result}){
                     </label>
                 ))}
                 <button className="submit_answer" onClick={onSubmitOption}>Submit Answer</button>
-                <button className="next-question" onClick={nextQuestion}>Next Question</button>
+                <button className="next_question" onClick={nextQuestion}>Next Question</button>
                 <div className="error_message">
                     <Image src="/images/icon-incorrect.svg" alt="correct icon" className="error_icon" width={40} height={40}/>
                     <span className="error_text">Please select an answer</span>

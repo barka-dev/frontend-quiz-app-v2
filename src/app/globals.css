@@ -251,6 +251,10 @@ button{
   border: none;
 }
 
+.next_question{
+  display:none;
+}
+
 input[type="radio"]{
   display:none;
 }

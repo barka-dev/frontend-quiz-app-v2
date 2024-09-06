@@ -24,10 +24,9 @@ export default function Quiz(){
             data_result.setTopicBgClass(bg_classes[filtered[0].title]);  
         }
     },[data_result, searchParams, result])
-    if(data_result.counter>10){
+    if(result && data_result.counter > result.questions.length){
         return(
             <>
-            {console.log("counter=>",data_result.counter)}
             <section>
                 <Title title_part1="Quiz completed" title_part2="You scored..."/>
             </section>
@@ -39,7 +38,6 @@ export default function Quiz(){
     }
     return(
         <>
-        {console.log("counter=>",data_result.counter)}
             <section>
                 <QuestionSection data={result} data_result={data_result}/>
             </section>
