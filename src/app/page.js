@@ -1,4 +1,4 @@
-import styles from "./page.module.css";
+// import styles from "./page.module.css";
 import SubjectsLinks from "./components/subjectsLinks";
 import Title from "./components/title";
 
