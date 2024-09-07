@@ -66,6 +66,7 @@ export default function ThemeSwitcher(){
     return(
         <div className='theme_switcher_container'>
             <Image src="/images/icon-sun-dark.svg" className="sunmoonIcons" alt="sun icon" width={24} height={24}/>
+            <label htmlFor='theme' className='checkbox_label'>switcher</label>
             <input type="checkbox" name="theme" className="themeIcon" id="theme" onChange={switchDarkLight}/>
             <Image src="/images/icon-moon-dark.svg" className="sunmoonIcons" alt="moon icon" width={24} height={24}/>
         </div>

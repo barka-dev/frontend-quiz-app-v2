@@ -34,7 +34,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/barka-dev/frontend-quiz-app-v2.git]
-- Live Site URL: [https://barka-dev.github.io/frontend-quiz-app-v2/]
+- Live Site URL: [https://ab-frontend-quiz.netlify.app/]
 
 ## My process
 

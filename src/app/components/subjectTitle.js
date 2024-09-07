@@ -22,7 +22,7 @@ export default function SubjectTitle({icon_url, title, bg_class }){
     return (
         <div className='subject_title_container'>
             <Image src={icon_url ? icon_url : '/images/icon-html.svg'} className= {`header_subject_icon ${ bg_class ? bg_class : ''}`} alt="topic icon" width={40} height={40}/>
-            <h1 className='header_subject_title'>{title ? title : ''}</h1>
+            <h1 className='header_subject_title'>{title ? title : 'Subject'}</h1>
         </div>
     )
 }
