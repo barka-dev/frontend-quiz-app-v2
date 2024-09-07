@@ -94,7 +94,7 @@ header{
   width:1rem;
 }
 
-.checkbox_label{
+.checkbox_label, .progress_label{
   position:absolute;
   visibility:hidden;
 }

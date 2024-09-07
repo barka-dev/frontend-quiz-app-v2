@@ -14,7 +14,8 @@ export default function QuestionSection({data, data_result}){
             <>
                 <p>Question {data_result.counter} of {data.questions.length}</p>
                 <h3>{data.questions[data_result.counter-1].question}</h3>
-                <input tabIndex="-1" type="range" className='range_status' min={1} max={10} value={data_result.counter} readOnly/>
+                <label htmlFor='progress' className='progress_label'>progress</label>
+                <input id='progress' tabIndex="-1" type="range" className='range_status' min={1} max={10} value={data_result.counter} readOnly/>
             </>
         )
     }else{
