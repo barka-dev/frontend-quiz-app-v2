@@ -134,7 +134,7 @@ export default function AnswersSection({data, data_result}){
         return(
             <>
                 {data.questions[data_result.counter-1].options.map((value, index)=>(
-                    <label tabindex="0" htmlFor={`answer_${letters[index]}`} className="answers"  key={index}>
+                    <label tabIndex="0" htmlFor={`answer_${letters[index]}`} className="answers"  key={index}>
                         <input type="radio" className="radios" id={`answer_${letters[index]}`} name="answer" value={letters[index]} onChange={handleStyleOnCheck}/> 
                         <span className="option_letter">{letters[index]}</span>
                         {value}

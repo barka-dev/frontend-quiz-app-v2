@@ -3,6 +3,7 @@
 import { useData } from '../DataContext';
 import ThemeSwitcher from "./themeSwitcher";
 import SubjectTitle from './subjectTitle';
+import { Suspense } from 'react';
 
 export default function Header(){
   const data_result = useData();
@@ -10,7 +11,9 @@ export default function Header(){
 if(data_result){
   return (
       <header>
-        <SubjectTitle icon_url={data_result.topicLogo} title={data_result.topicTitle} bg_class={data_result.topicBgClass}/>
+        <Suspense fallback={<h3>Loading ...</h3>}>
+          <SubjectTitle icon_url={data_result.topicLogo} title={data_result.topicTitle} bg_class={data_result.topicBgClass}/>
+        </Suspense>
         <ThemeSwitcher/>
       </header>
   )
