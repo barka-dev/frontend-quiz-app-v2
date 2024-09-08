@@ -191,7 +191,7 @@ article{
   -moz-box-shadow:none !important;
 }
 
-.answers:hover > span{
+.answers:hover > .radios:not(:checked) + span{
   background-color:#F6E7FF;
   color: var(--purple);
 }
