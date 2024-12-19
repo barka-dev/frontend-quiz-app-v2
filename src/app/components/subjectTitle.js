@@ -2,8 +2,10 @@
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import { useData } from '../DataContext';
 
-export default function SubjectTitle({icon_url, title, bg_class }){
+export default function SubjectTitle(){
+    const {topicLogo, topicTitle, topicBgClass} = useData();
     const searchParams = useSearchParams();
 
     useEffect(()=>{
@@ -21,8 +23,8 @@ export default function SubjectTitle({icon_url, title, bg_class }){
 
     return (
         <div className='subject_title_container'>
-            <Image src={icon_url ? icon_url : '/images/icon-html.svg'} className= {`header_subject_icon ${ bg_class ? bg_class : ''}`} alt="topic icon" width={40} height={40}/>
-            <h1 className='header_subject_title'>{title ? title : 'Subject'}</h1>
+            <Image src={topicLogo ? topicLogo : '/images/icon-html.svg'} className= {`header_subject_icon ${ topicBgClass ? topicBgClass : ''}`} alt="topic icon" width={40} height={40}/>
+            <h1 className='header_subject_title'>{topicTitle ? topicTitle : 'Subject'}</h1>
         </div>
     )
 }

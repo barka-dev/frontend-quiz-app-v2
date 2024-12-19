@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
+import { useData } from "../DataContext";
 
-export default function AnswersSection({data, data_result}){
+export default function AnswersSection({data}) {
+    const {counter, setCounter, score, setScore} = useData();
     const letters = ["A","B","C","D"];
     const label_classes = ["active", "correct_answer_label","incorrect_answer_label"];
     const span_classes = ["active_letter","correct_answer_span", "incorrect_answer_span"];
@@ -56,8 +58,8 @@ export default function AnswersSection({data, data_result}){
 
     const checkSubmittedResponse = () => {
         const checked_option = document.querySelector("input[type='radio']:checked").value;
-        const selected_answer = data.questions[data_result.counter-1].options[letters.indexOf(checked_option)];
-        const correct_answer = data.questions[data_result.counter-1].answer;
+        const selected_answer = data.questions[counter-1].options[letters.indexOf(checked_option)];
+        const correct_answer = data.questions[counter-1].answer;
         if(selected_answer.trim() === correct_answer.trim()){
             return true;
         }
@@ -65,7 +67,7 @@ export default function AnswersSection({data, data_result}){
     }
 
     const markCorrectAnswer = () => {
-        const correct_answer = data.questions[data_result.counter-1].answer;
+        const correct_answer = data.questions[counter-1].answer;
         document.querySelectorAll(".answers").forEach((el)=>{
             if(el.textContent.slice(1).trim() === correct_answer){
                 el.lastChild.src = '/images/icon-correct.svg';
@@ -93,7 +95,7 @@ export default function AnswersSection({data, data_result}){
             if(isAnswerCorrect){
                 styleOption(label_classes, span_classes, "correct_answer_label", "correct_answer_span");
                 toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
-                data_result.setScore(data_result.score+1);
+                setScore(score+1);
             }else{
                 styleOption(label_classes, span_classes, "incorrect_answer_label", "incorrect_answer_span");
                 toggleDisplayForCorrectIncorrectIcon(isAnswerCorrect);
@@ -108,7 +110,7 @@ export default function AnswersSection({data, data_result}){
     }
 
     const nextQuestion = () => {
-        data_result.setCounter(data_result.counter+1);
+        setCounter(counter+1);
         document.querySelectorAll(".radios").forEach((element)=>{
             element.checked = false;
         })
@@ -118,22 +120,31 @@ export default function AnswersSection({data, data_result}){
         document.querySelector(".next_question").style.display = 'none';
         resumeSelectingOptions();
     }
-
-    document.querySelectorAll('.answers').forEach((el)=>{
-        el.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              this.click();
-            }
-        });
-    })
+    useEffect(()=>{
+        document.querySelectorAll('.answers').forEach((el)=>{
+            el.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                this.click();
+                }
+            });
+        })
+    },[])
+    // document.querySelectorAll('.answers').forEach((el)=>{
+    //     el.addEventListener('keydown', function (event) {
+    //         if (event.key === 'Enter' || event.key === ' ') {
+    //           event.preventDefault();
+    //           this.click();
+    //         }
+    //     });
+    // })
 
    
 
-    if(data && data_result){
+    if(data){
         return(
             <>
-                {data.questions[data_result.counter-1].options.map((value, index)=>(
+                {data.questions[counter-1].options.map((value, index)=>(
                     <label tabIndex="0" htmlFor={`answer_${letters[index]}`} className="answers"  key={index}>
                         <input type="radio" className="radios" id={`answer_${letters[index]}`} name="answer" value={letters[index]} onChange={handleStyleOnCheck}/> 
                         <span className="option_letter">{letters[index]}</span>

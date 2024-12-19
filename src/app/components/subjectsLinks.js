@@ -1,17 +1,17 @@
 'use client'
 
 import { useContext, useEffect, useState } from 'react';
-import { DataContext } from '../DataContext';
+import { useData } from '../DataContext';
 import Image from "next/image";
 import Link from "next/link";
 
 
 export default function SubjectsLinks(){
-    const data = useContext(DataContext);
+    const {data, setCounter, setScore} = useData();
     useEffect(()=>{
         if(data){
-            data.setCounter(1);
-            data.setScore(0);
+            setCounter(1);
+            setScore(0);
         }
         const storage_value = localStorage.getItem('isDark');
         const isDark = storage_value === "true";
@@ -20,7 +20,7 @@ export default function SubjectsLinks(){
                 el.classList.add('disable_box_shadow');
             })
         }
-    },[data])                       
+    },[data, setCounter, setScore])                       
     return(
         <>
             <Link href={{ pathname:'/questions', query:{ subject:'HTML'}}} className="subjects" >

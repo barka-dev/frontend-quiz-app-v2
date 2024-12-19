@@ -1,21 +1,23 @@
 'use client'
 
 import { useEffect} from 'react';
+import { useData } from '../DataContext';
 
-export default function QuestionSection({data, data_result}){
+export default function QuestionSection({data}){
+    const {counter} = useData();
     useEffect(()=>{
-        if(data && data_result){
-            document.documentElement.style.setProperty('--range_status', `${data_result ? data_result.counter*10 : 0}%`);
+        if(data &&  counter){
+            document.documentElement.style.setProperty('--range_status', `${ counter ?  counter*10 : 0}%`);
         }
-    },[data,data_result])
+    },[data, counter])
 
-    if(data && data_result){
+    if(data &&  counter){
         return(
             <>
-                <p>Question {data_result.counter} of {data.questions.length}</p>
-                <h3>{data.questions[data_result.counter-1].question}</h3>
+                <p>Question { counter} of {data.questions.length}</p>
+                <h3>{data.questions[ counter-1].question}</h3>
                 <label htmlFor='progress' className='progress_label'>progress</label>
-                <input id='progress' tabIndex="-1" type="range" className='range_status' min={1} max={10} value={data_result.counter} readOnly/>
+                <input id='progress' tabIndex="-1" type="range" className='range_status' min={1} max={10} value={ counter} readOnly/>
             </>
         )
     }else{

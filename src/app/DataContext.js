@@ -1,40 +1,73 @@
-'use client'
-import { createContext, useContext, useState, useEffect} from "react";
+import { createContext, useContext} from "react";
 
-export const DataContext = createContext();
+export const DataContext = createContext({
+    fetchData : async () => {},
+    data: null,
+    counter: 1,
+    score: 0,
+    topicLogo: '',
+    topicTitle: '',
+    topicBgClass: '',  
+});
 
-export const DataProvider = ({children}) => {
-    const [data, setData] = useState(null);
-    const [counter, setCounter] = useState(1);
-    const [score, setScore] = useState(0);
-    const [topicLogo, setTopicLogo] = useState('');
-    const [topicTitle, setTopicTitle] = useState('');
-    const [topicBgClass, setTopicBgClass] = useState('');
+export const DataProvider = DataContext.Provider;
 
-
-    useEffect(()=>{
-        fetch('/data/data.json')
-        .then((response) => response.json())
-        .then((jsonData) =>{
-            setData(jsonData.quizzes);
-        })
-        .catch((error) => console.error('Error fetching the data: ', error));
-    },[]);
-
-    return (
-        <DataContext.Provider value={{
-            data, 
-            counter, setCounter, 
-            score, setScore, 
-            topicLogo, setTopicLogo, 
-            topicTitle, setTopicTitle, 
-            topicBgClass, setTopicBgClass
-        }}>
-            {children}
-        </DataContext.Provider>
-    )
+export const useData = () => {
+    return useContext(DataContext);
 }
 
-export function useData(){
-    return useContext(DataContext)
-}
+// import { createContext, useContext, useState, useEffect} from "react";
+
+// export const DataContext = createContext();
+
+// export const DataProvider = ({children}) => {
+//     const [data, setData] = useState(null);
+//     const [counter, setCounter] = useState(1);
+//     const [score, setScore] = useState(0);
+//     const [topicLogo, setTopicLogo] = useState('');
+//     const [topicTitle, setTopicTitle] = useState('');
+//     const [topicBgClass, setTopicBgClass] = useState('');
+
+//     const fetchData = async () => {
+//         try{
+//             const response = await fetch('/data/data.json');
+//             if(!response.ok){
+//                 throw new Error('Failed to fetch the data');
+//             }
+//             const jsonData = await response.json();
+//             setData(jsonData.quizzes);
+//         }catch(error){
+//             console.error('Error fetching the data: ', error);
+//         }
+//     }
+
+//     fetchData();
+
+
+
+    // useEffect(()=>{
+    //     fetch('/data/data.json')
+    //     .then((response) => response.json())
+    //     .then((jsonData) =>{
+    //         setData(jsonData.quizzes);
+    //     })
+    //     .catch((error) => console.error('Error fetching the data: ', error));
+    // },[]);
+
+//     return (
+//         <DataContext.Provider value={{
+//             data, 
+//             counter, setCounter, 
+//             score, setScore, 
+//             topicLogo, setTopicLogo, 
+//             topicTitle, setTopicTitle, 
+//             topicBgClass, setTopicBgClass
+//         }}>
+//             {children}
+//         </DataContext.Provider>
+//     )
+// }
+
+// export function useData(){
+//     return useContext(DataContext)
+// }
